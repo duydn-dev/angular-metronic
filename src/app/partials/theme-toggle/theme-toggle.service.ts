@@ -19,6 +19,7 @@ export class ThemeToggleService {
   constructor(rendererFactory: RendererFactory2, @Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
     if (this.isBrowser) {
+      console.log('ThemeToggleService initialized');
       this.systemMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
       this.renderer = rendererFactory.createRenderer(null, null);
 
@@ -30,11 +31,13 @@ export class ThemeToggleService {
         this.themeMode.set('system');
       }
       this.updateEffectiveTheme();
+      this.setSidebarThemeMode(this.effectiveTheme());
       // React to themeMode changes
       effect(() => {
         this.updateEffectiveTheme();
         this.applyThemeToHtml();
         this.setupSystemListener();
+        this.setSidebarThemeMode(this.effectiveTheme());
       });
     }
 
@@ -96,7 +99,22 @@ export class ThemeToggleService {
       this.updateEffectiveTheme();
       this.applyThemeToHtml();
       this.setupSystemListener();
+      this.setSidebarThemeMode(mode);
     }
 
+  }
+  setSidebarThemeMode(mode: ThemeMode) {
+    if (this.isBrowser) {
+      const lightSidebar = document.querySelector('.light-sidebar');
+      const darkSidebar = document.querySelector('.dark-sidebar');
+      if ((mode === 'light') || mode === 'system') {
+        lightSidebar?.classList.remove('hidden');
+        darkSidebar?.classList.add('hidden');
+      }
+      else {
+        lightSidebar?.classList.add('hidden');
+        darkSidebar?.classList.remove('hidden');
+      }
+    }
   }
 }

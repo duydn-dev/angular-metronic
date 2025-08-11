@@ -5,12 +5,13 @@ import { SidebarComponent } from '../../shared/components/system-managerment/sid
 import { HeaderComponent } from '../../shared/components/system-managerment/header/header.component';
 import { FooterComponent } from '../../shared/components/system-managerment/footer/footer.component';
 import { ThemeToggleComponent } from '../../partials/theme-toggle/theme-toggle.component';
+import { ModalsSearchComponent } from '../../partials/modals-search/modals-search.component';
 
 @Component({
   selector: 'app-system-management-layout',
   templateUrl: './system-management-layout.html',
   styleUrl: './system-management-layout.scss',
-  imports: [RouterOutlet, ThemeToggleComponent, SidebarComponent, HeaderComponent, FooterComponent],
+  imports: [RouterOutlet, ThemeToggleComponent, SidebarComponent, HeaderComponent, FooterComponent, ModalsSearchComponent],
 })
 export class SystemManagementLayout {
 

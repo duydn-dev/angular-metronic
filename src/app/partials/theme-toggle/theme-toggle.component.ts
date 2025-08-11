@@ -13,6 +13,7 @@ export class ThemeToggleComponent {
   effectiveTheme = this.themeService.effectiveTheme;
 
   setThemeMode(mode: ThemeMode) {
+    console.log('Setting theme mode:', mode);
     this.themeService.setThemeMode(mode);
   }
 }
